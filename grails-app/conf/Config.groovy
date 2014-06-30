@@ -1,5 +1,3 @@
-import grails.plugins.springsecurity.SecurityConfigType
-
 // locations to search for config files that get merged into the main config
 // config files can either be Java properties files or ConfigSlurper scripts
 
@@ -11,6 +9,7 @@ import grails.plugins.springsecurity.SecurityConfigType
 // if(System.properties["${appName}.config.location"]) {
 //    grails.config.locations << "file:" + System.properties["${appName}.config.location"]
 // }
+import grails.plugins.springsecurity.SecurityConfigType
 
 grails.project.groupId = appName // change this to alter the default package name and Maven publishing destination
 grails.mime.file.extensions = true // enables the parsing of file extensions from URLs into the request format
@@ -59,10 +58,10 @@ environments {
         grails.serverURL = "http://www.changeme.com"
     }
     development {
-        grails.serverURL = "http://localhost:8082/${appName}"
+        grails.serverURL = "http://localhost:8081/${appName}"
     }
     test {
-        grails.serverURL = "http://localhost:8082/${appName}"
+        grails.serverURL = "http://localhost:8081/${appName}"
     }
 
 }
@@ -76,7 +75,7 @@ log4j = {
     //    console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
     //}
 
-    error  'org.codehaus.groovy.grails.web.servlet',  //  controllers
+    warn 'org.codehaus.groovy.grails.web.servlet',  //  controllers
            'org.codehaus.groovy.grails.web.pages', //  GSP
            'org.codehaus.groovy.grails.web.sitemesh', //  layouts
            'org.codehaus.groovy.grails.web.mapping.filter', // URL mapping
@@ -87,8 +86,14 @@ log4j = {
            'org.springframework',
            'org.hibernate',
            'net.sf.ehcache.hibernate'
-
     warn   'org.mortbay.log'
+	debug   'grails.plugins.springsecurity'
+	debug   'org.codehaus.groovy.grails.plugins.springsecurity'
+	debug   'org.springframework.security'
+	debug   'org.jasig.cas.client'
+	debug   'mx.mierda'
+	debug	'validation'
+	debug   'codeisdesign'
 }
 
 // Added by the Spring Security Core plugin:
@@ -111,6 +116,9 @@ grails.plugins.springsecurity.interceptUrlMap = [
 grails.plugins.springsecurity.cas.loginUri = '/login'
 grails.plugins.springsecurity.cas.serviceUrl = 'http://localhost:8082/sso-example-2/j_spring_cas_security_check'
 grails.plugins.springsecurity.cas.serverUrlPrefix = 'https://localhost:8443/cas'
-grails.plugins.springsecurity.cas.proxyCallbackUrl = 'http://localhost:8082/sso-example-2/secure/receptor'
-grails.plugins.springsecurity.cas.proxyReceptorUrl = '/secure/receptor'
+//grails.plugins.springsecurity.cas.proxyCallbackUrl = 'http://localhost:8081/sso-example-1/secure/receptor'
+//grails.plugins.springsecurity.cas.proxyReceptorUrl = '/secure/receptor'
 grails.plugins.springsecurity.logout.afterLogoutUrl = 'https://localhost:8443/cas/logout?url=http://localhost:8082/sso-example-2/'
+grails.plugins.springsecurity.cas.userAttribsFromCas = true
+grails.plugins.springsecurity.cas.authorityAttribNamesFromCas = ['authorities']
+grails.plugins.springsecurity.userLookup.userDomainClassName = 'codeisdesign.example.sso.security.User'
