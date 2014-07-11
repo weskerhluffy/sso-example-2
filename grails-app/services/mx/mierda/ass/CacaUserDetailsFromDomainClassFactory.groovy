@@ -1,8 +1,9 @@
 package mx.mierda.ass
 
-import org.codehaus.groovy.grails.plugins.springsecurity.cas.UserDetailsFromDomainClassFactory
-import org.codehaus.groovy.grails.plugins.springsecurity.GrailsUser
-import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
+import grails.plugin.springsecurity.cas.UserDetailsFromDomainClassFactory
+import grails.plugin.springsecurity.userdetails.GrailsUser
+
+import grails.plugin.springsecurity.SpringSecurityUtils
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 import groovy.util.logging.Log4j
